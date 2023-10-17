@@ -7,7 +7,7 @@ using Plugin.Firebase.CloudMessaging;
 using Plugin.Firebase.Crashlytics;
 #if IOS
 using Plugin.Firebase.Bundled.Platforms.iOS;
-#else
+#elif ANDROID
 using Plugin.Firebase.Bundled.Platforms.Android;
 #endif
 
@@ -42,14 +42,13 @@ public static class MauiProgram
 				CrossFirebaseCrashlytics.Current.SetCrashlyticsCollectionEnabled(true);
 				return false;
 			}));
-#else
+#elif ANDROID
             events.AddAndroid(android => android.OnCreate((activity, _) =>
                 CrossFirebase.Initialize(activity, CreateCrossFirebaseSettings())));
                 CrossFirebaseCrashlytics.Current.SetCrashlyticsCollectionEnabled(true);
 #endif
 		});
 
-		builder.Services.AddSingleton(_ => CrossFirebaseAuth.Current);
 		builder.Services.AddSingleton(_ => CrossFirebaseCloudMessaging.Current);
 		return builder;
 	}
@@ -57,7 +56,6 @@ public static class MauiProgram
 	private static CrossFirebaseSettings CreateCrossFirebaseSettings()
 	{
 		return new CrossFirebaseSettings(
-			isAuthEnabled: true, 
 			isCloudMessagingEnabled: true,
 			isAnalyticsEnabled: true);
 	}

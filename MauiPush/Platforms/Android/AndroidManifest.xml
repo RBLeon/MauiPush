@@ -1,20 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+
 	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true">
-		<receiver
-				android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver"
-				android:exported="false" />
-		<receiver
-				android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
-				android:exported="true"
-				android:permission="com.google.android.c2dm.permission.SEND">
+
+		<!-- Firebase Messaging Service -->
+		<service android:name=".MyFirebaseMessagingService" android:exported="false">
+			<intent-filter>
+				<action android:name="com.google.firebase.MESSAGING_EVENT" />
+			</intent-filter>
+		</service>
+
+		<!-- Default Firebase Receivers -->
+		<receiver android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver" android:exported="false" />
+		<receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND">
 			<intent-filter>
 				<action android:name="com.google.android.c2dm.intent.RECEIVE" />
 				<action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 				<category android:name="${applicationId}" />
 			</intent-filter>
 		</receiver>
+
+		<!-- Optional: Default Notification Icon and Color (adjust as needed) -->
+		<meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@mipmap/appicon" />
+		<!-- You might need to define a color in Resources/values/colors.xml for the next line -->
+		<!-- <meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/colorAccent" /> -->
+
+		<!-- Optional: Notification Channel for Android 8.0 and Above (adjust as needed) -->
+		<!-- <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="@string/default_notification_channel_id" /> -->
+
 	</application>
+
+	<!-- Permissions -->
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_PHONE_STATE" />
+	<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
 </manifest>

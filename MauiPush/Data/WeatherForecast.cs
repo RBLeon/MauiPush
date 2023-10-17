@@ -1,4 +1,6 @@
-﻿namespace MauiPush.Data;
+﻿using System;
+
+namespace MauiPush.Data;
 
 public class WeatherForecast
 {
