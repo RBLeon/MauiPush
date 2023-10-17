@@ -1,0 +1,17 @@
+﻿@page "/counter"
+@using Plugin.Firebase.CloudMessaging
+
+<h1>Counter</h1>
+
+<button class="btn btn-primary" @onclick="OnCounterClicked">Click me</button>
+
+@code {
+
+    private async Task OnCounterClicked()
+    {
+        await CrossFirebaseCloudMessaging.Current.CheckIfValidAsync();
+        var token = await CrossFirebaseCloudMessaging.Current.GetTokenAsync();
+        Console.WriteLine($"FCM token: {token}");
+    }
+}
+
