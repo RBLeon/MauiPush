@@ -4,7 +4,7 @@
 	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true">
 
 		<!-- Firebase Messaging Service -->
-		<service android:name=".MyFirebaseMessagingService" android:exported="false">
+		<service android:name="MauiPush.Platforms.Android.MyFirebaseMessagingService" android:exported="false">
 			<intent-filter>
 				<action android:name="com.google.firebase.MESSAGING_EVENT" />
 			</intent-filter>
